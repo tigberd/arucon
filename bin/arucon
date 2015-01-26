@@ -1,0 +1,26 @@
+#!/usr/bin/env ruby
+
+require 'serialport'
+require 'yaml'
+
+$LOAD_PATH.unshift(File.dirname(__FILE__) + '/../lib')
+
+require 'arucon'
+
+config = YAML.load(File.open('config.yml').read)
+serial_port = SerialPort.new(
+  config['serial_port']['port'],
+  config['serial_port']['bps'],
+  8,
+  1,
+  SerialPort::NONE
+)
+
+parser  = Arucon::Parser::Parser.new(config['button'])
+adapter = Arucon::Adapter.new(serial_port)
+
+begin
+  adapter.send(parser.parse(ARGF.read))
+rescue TypeError
+  puts 'parse error'
+end

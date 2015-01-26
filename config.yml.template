@@ -1,0 +1,14 @@
+serial_port:
+  port: 
+  bps : 9600
+button:
+  circle  : circle
+  cross   : cross
+  triangle: triangle
+  square  : square
+  l1      : L1
+  l2      : L2
+  r1      : R1
+  r2      : R2
+  start   : START
+  select  : SELECT
